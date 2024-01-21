@@ -60,10 +60,11 @@
                 <TextView
                     android:id="@+id/Current_code"
                     android:layout_width="match_parent"
+                    android:layout_height="35dp"
                     android:layout_marginTop="10dp"
-                    android:layout_height="25dp"
                     android:editable="false"
-                    android:hint="The code gose here" />
+                    android:hint="The code gose here"
+                    android:textSize="25dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -90,8 +91,8 @@
                     android:id="@+id/next_code"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
-                    android:layout_height="25dp"
-
+                    android:layout_height="35dp"
+                    android:textSize="25dp"
                     android:editable="false"
                     android:hint="The code gose here" />
 
