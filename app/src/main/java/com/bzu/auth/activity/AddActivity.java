@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -103,12 +105,48 @@ public class AddActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Res");
             builder.setMessage(result.getContents());
+
+
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             }).show();
+
+
+            Pattern pattern = Pattern.compile("\\?secret=([^&]+).*&issuer=([^&]+)");
+            Matcher matcher = pattern.matcher(result.getContents());
+
+            if (matcher.find()) {
+                String secret = matcher.group(1);
+                String issuer = matcher.group(2);
+
+                Map<String, String> data = new HashMap<>();
+                data.put("email", Objects.requireNonNull(Database.auth.getCurrentUser()).getEmail());
+                data.put("app", issuer);
+                data.put("secret", secret);
+                Database.database.collection("secretKeys").
+                        add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast toast = Toast.makeText(AddActivity.this, "تم اضافة المنتج بنجاح 🥳", Toast.LENGTH_SHORT);
+                                toast.show();
+                                Intent intent = new Intent(AddActivity.this, MainScreen.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast toast = Toast.makeText(AddActivity.this, "خطأ في اضافة المنتج 😥", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        });
+            } else {
+                System.out.println("No match found.");
+            }
+
         }
     });
 
