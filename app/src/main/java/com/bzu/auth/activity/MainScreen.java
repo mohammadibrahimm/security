@@ -26,8 +26,5 @@ public class MainScreen extends AppCompatActivity {
             finish();
         }
 
-
-
-
     }
 }
