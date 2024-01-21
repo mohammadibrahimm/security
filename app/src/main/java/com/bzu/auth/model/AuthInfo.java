@@ -6,10 +6,13 @@ public class AuthInfo {
     String Code;
     String secretKey;
 
+    int number;
+
     public AuthInfo(String appName, String code, String secretKey) {
         this.appName = appName;
         this.Code = code;
         this.secretKey = secretKey;
+        number = 1;
     }
 
     public String getAppName() {
@@ -30,6 +33,14 @@ public class AuthInfo {
 
     public String getSecretKey() {
         return secretKey;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public void setSecretKey(String secretKey) {
