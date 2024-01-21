@@ -90,18 +90,21 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
     @Override
     public void onBindViewHolder(@NonNull CardView holder, @SuppressLint("RecyclerView") int position) {
         // Bind data to the ViewHolder
+
+        long totalTimeInMillis = 30000;
+
         holder.appName.setText(data.get(position).getAppName());
         holder.code.setText(String.valueOf(data.get(position).getCode()));
         holder.nextCode.setText(String.valueOf(data.get(position).getNextCode()));
-        holder.curr_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
-        holder.next_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
+        holder.curr_timer.setText("Reset in: " + String.valueOf(totalTimeInMillis / 1000));
+        holder.next_timer.setText("Reset in: " + String.valueOf(totalTimeInMillis / 1000));
 
-         countDownTimer = new CountDownTimer(30000, 1000) {
+         countDownTimer = new CountDownTimer(totalTimeInMillis, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                holder.curr_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
-                holder.next_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
+                holder.curr_timer.setText("Reset in: " + String.valueOf(totalTimeInMillis / 1000));
+                holder.next_timer.setText("Reset in: " + String.valueOf(totalTimeInMillis / 1000));
             }
 
             @Override
