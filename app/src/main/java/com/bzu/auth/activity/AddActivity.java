@@ -135,7 +135,11 @@ public class AddActivity extends AppCompatActivity {
                 String secret = matcher.group(1);
                 pattern =Pattern.compile("issuer=([^&]+)");
                 matcher = pattern.matcher(result.getContents());
+                Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
+                Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
                 if(matcher.find()) {
+                    Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
+                    Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
                     Map<String, String> data = new HashMap<>();
                     data.put("email", Objects.requireNonNull(Database.auth.getCurrentUser()).getEmail());
                     data.put("app", matcher.group(1));
