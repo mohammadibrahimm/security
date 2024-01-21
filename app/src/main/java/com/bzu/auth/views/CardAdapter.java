@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-
+import com.amdelamar.jotp.OTP;
+import com.amdelamar.jotp.type.Type;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,8 +19,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bzu.auth.R;
 import com.bzu.auth.model.AuthInfo;
-import com.amdelamar.jotp.OTP;
-import com.amdelamar.jotp.type.Type;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -55,15 +58,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
                         updateData(i);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
-                    } catch (NoSuchAlgorithmException e) {
-                        throw new RuntimeException(e);
-                    } catch (InvalidKeyException e) {
+                    } catch (NoSuchAlgorithmException | InvalidKeyException e) {
                         throw new RuntimeException(e);
                     }
                 }
                 notifyDataSetChanged();
                 // Schedule the next update after 30 seconds
-                handler.postDelayed(this, 30000); // 30 seconds in milliseconds
+                handler.postDelayed(this, 300); // 30 seconds in milliseconds
             }
         };
 
@@ -72,9 +73,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
 
     }
 
-    private void updateData(int position) throws IOException, NoSuchAlgorithmException, InvalidKeyException {
+    private void updateData(int position) throws IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidKeyException {
 
-        String hexTime = OTP.timeInHex(System.currentTimeMillis(), 30);
+        String hexTime = OTP.timeInHex(System.currentTimeMillis() + 30000, 30);
         String newValue = OTP.create(data.get(position).getSecretKey(), hexTime, 6, Type.TOTP);
         data.get(position).setCode(newValue);
         updateTimes.put(position, System.currentTimeMillis());
@@ -93,7 +94,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
 
         // Update the timer
         long timeElapsed = System.currentTimeMillis() - updateTimes.get(position);
-        long timeRemaining = 30000 - timeElapsed; // 30 seconds in milliseconds
+        long timeRemaining = 300 - timeElapsed; // 30 seconds in milliseconds
 
         if (timeRemaining <= 0) {
             holder.code.setText("Updating...");
