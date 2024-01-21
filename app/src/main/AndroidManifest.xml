@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".activity.MainScreen">
     </activity>
+        <activity android:name=".activity.AddActivity">
+        </activity>
     </application>
 
 </manifest>

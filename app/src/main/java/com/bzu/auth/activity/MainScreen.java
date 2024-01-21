@@ -3,9 +3,11 @@ package com.bzu.auth.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import com.bzu.auth.MainActivity1;
 import com.bzu.auth.R;
 import com.bzu.auth.model.AuthInfo;
 import com.bzu.auth.views.CardAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
@@ -23,6 +26,9 @@ public class MainScreen extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private CardAdapter adapter;
+
+    private FloatingActionButton fabAddAccount;
+    private CardView cardView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +56,21 @@ public class MainScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CardAdapter(this, data);
         recyclerView.setAdapter(adapter);
+
+        fabAddAccount = findViewById(R.id.fabAddAccount);
+        cardView = findViewById(R.id.cardView);
+
+        fabAddAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cardView.getVisibility() == View.VISIBLE) {
+                    cardView.setVisibility(View.GONE);
+                } else {
+                    Intent intent = new Intent(MainScreen.this, AddActivity.class);
+                    startActivityForResult(intent, 1);
+                }
+            }
+        });
 
     }
 }

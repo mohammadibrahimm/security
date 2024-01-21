@@ -28,50 +28,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/navHeaderLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
         android:padding="16dp">
 
-        <Spinner
-            android:id="@+id/socialMediaSpinner"
+        <EditText
+            android:id="@+id/accountTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:spinnerMode="dropdown"
-            android:entries="@array/social_media_options"/>
+            android:layout_marginTop="16dp"
+            android:hint="Tag (Anything can be here)"
+            android:autofillHints="" />
 
         <EditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/secretEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/socialMediaSpinner"
+            android:layout_below="@+id/accountTag"
             android:layout_marginTop="16dp"
-            android:hint="ACCOUNT"/>
-
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/emailEditText"
-            android:layout_marginTop="16dp"
+            android:hint="Secret key"
             android:inputType="textPassword"
-            android:hint="CODE"/>
-
-        <Spinner
-            android:id="@+id/authTypeSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/passwordEditText"
-            android:layout_marginTop="16dp"
-            android:spinnerMode="dropdown"
-            android:entries="@array/auth_type_options"/>
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/addButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/authTypeSpinner"
+            android:layout_below="@+id/secretEditText"
             android:layout_marginTop="24dp"
-            android:text="ADD"
-            />
+            android:text="ADD" />
+
+        <Button
+            android:id="@+id/scanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addButton"
+            android:layout_marginTop="24dp"
+            android:text="Scan QR code" />
 
     </RelativeLayout>
 

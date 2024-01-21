@@ -4,24 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import com.amdelamar.jotp.OTP;
 import com.amdelamar.jotp.type.Type;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bzu.auth.R;
 import com.bzu.auth.model.AuthInfo;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
