@@ -106,6 +106,7 @@ public class AddActivity extends AppCompatActivity {
             Pattern pattern = Pattern.compile("\\?secret=([^&]+).*&issuer=([^&]+)");
             Matcher matcher = pattern.matcher(result.getContents());
             Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
+            Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
             if (matcher.find()) {
                 String secret = matcher.group(1);
                 String issuer = matcher.group(2);
