@@ -57,10 +57,11 @@
                     android:text="@string/current_code"
                     tools:ignore="TextViewEdits" />
 
-                <EditText
+                <TextView
                     android:id="@+id/Current_code"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="25dp"
                     android:editable="false"
                     android:hint="The code gose here" />
 
@@ -83,13 +84,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/next_code"
-                    android:id="@+id/next_code"
                     />
 
-                <EditText
-                    android:id="@+id/user_room_review"
+                <TextView
+                    android:id="@+id/next_code"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="25dp"
+
                     android:editable="false"
                     android:hint="The code gose here" />
 
