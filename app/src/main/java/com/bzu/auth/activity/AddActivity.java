@@ -66,7 +66,7 @@ public class AddActivity extends AppCompatActivity {
                             add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast toast = Toast.makeText(AddActivity.this, "تم اضافة المنتج بنجاح 🥳", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(AddActivity.this, "Account has been added", Toast.LENGTH_SHORT);
                                     toast.show();
                                     Intent intent = new Intent(AddActivity.this, MainScreen.class);
                                     startActivity(intent);
@@ -75,7 +75,7 @@ public class AddActivity extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast toast = Toast.makeText(AddActivity.this, "خطأ في اضافة المنتج 😥", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(AddActivity.this, "Something went wrong please try again", Toast.LENGTH_SHORT);
                                     toast.show();
                                 }
                             });
@@ -98,74 +98,22 @@ public class AddActivity extends AppCompatActivity {
         options.setBeepEnabled(true);
         options.setOrientationLocked(true);
         options.setCaptureActivity(CaptureAct.class);
-
-        Pattern pattern = Pattern.compile("secret=([^&]+)");
-        Matcher matcher = pattern.matcher("otpauth://totp/IT-Tools:demo-user?issuer=IT-Tools&secret=ZTHNT2ATMLYSNBCQ&algorithm=SHA1&digits=6&period=30");
-
-        if (matcher.find()) {
-            String secret = matcher.group(1);
-            assert secret != null;
-            Log.d("Secret: " ,secret);
-            pattern =Pattern.compile("issuer=([^&]+)");
-            matcher = pattern.matcher("otpauth://totp/IT-Tools:demo-user?issuer=IT-Tools&secret=ZTHNT2ATMLYSNBCQ&algorithm=SHA1&digits=6&period=30");
-            if(matcher.find()){
-                secret = matcher.group(1);
-                assert secret != null;
-                Log.d("issuer: ", secret);
-            }
-        } else {
-            System.out.println("No match found.");
-        }
-
-
         barcodeLauncher.launch(options);
     }
-
-    /*
-                    Map<String, String> data = new HashMap<>();
-                data.put("email", Objects.requireNonNull(Database.auth.getCurrentUser()).getEmail());
-                data.put("app", issuer);
-                data.put("secret", secret);
-                Database.database.collection("secretKeys").
-                        add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast toast = Toast.makeText(AddActivity.this, "تم اضافة المنتج بنجاح 🥳", Toast.LENGTH_SHORT);
-                                toast.show();
-                                Intent intent = new Intent(AddActivity.this, MainScreen.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast toast = Toast.makeText(AddActivity.this, "خطأ في اضافة المنتج 😥", Toast.LENGTH_SHORT);
-                                toast.show();
-                            }
-                        });
-     */
 
     ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
         if(result.getContents() != null) {
 
-
             String url = result.getContents();
-
             Pattern pattern = Pattern.compile("secret=([^&]+)");
             Matcher matcher = pattern.matcher(url);
-
             if (matcher.find()) {
-                Log.d("DDDDDDDDDDDDDDDDDDDD", Objects.requireNonNull(matcher.group(1)));
-                Log.d("TTTTTTTTTTTTTTTTT", url);
                 String secret = matcher.group(1);
                 pattern = Pattern.compile("issuer=([^&]+)");
                 matcher = pattern.matcher(url);
                 assert secret != null;
-                Log.d("DDDDDDDDDDDDDDDDDDDD", secret);
-                Log.d("TTTTTTTTTTTTTTTTT", url);
                 if(matcher.find()) {
-                    Log.d("DDDDDDDDDDDDDDDDDDDD", Objects.requireNonNull(matcher.group(1)));
-                    Log.d("TTTTTTTTTTTTTTTTT", url);
+
                     Map<String, String> data = new HashMap<>();
                     data.put("email", Objects.requireNonNull(Database.auth.getCurrentUser()).getEmail());
                     data.put("app", matcher.group(1));
@@ -174,7 +122,7 @@ public class AddActivity extends AppCompatActivity {
                             add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast toast = Toast.makeText(AddActivity.this, "تم اضافة المنتج بنجاح 🥳", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(AddActivity.this, "Account has been added", Toast.LENGTH_SHORT);
                                     toast.show();
                                     Intent intent = new Intent(AddActivity.this, MainScreen.class);
                                     startActivity(intent);
@@ -183,7 +131,7 @@ public class AddActivity extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast toast = Toast.makeText(AddActivity.this, "خطأ في اضافة المنتج 😥", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(AddActivity.this, "Something went wrong please try again", Toast.LENGTH_SHORT);
                                     toast.show();
                                 }
                             });

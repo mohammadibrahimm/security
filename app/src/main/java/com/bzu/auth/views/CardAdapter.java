@@ -2,6 +2,7 @@ package com.bzu.auth.views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
 
     Context context;
     List<AuthInfo> data;
-
+    private CountDownTimer countDownTimer;
     private Map<Integer, Long> updateTimes; // Store last update time for each item
 
     int x = 1;
@@ -85,14 +86,29 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
         return new CardView(LayoutInflater.from(context).inflate(R.layout.card_item, parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CardView holder, @SuppressLint("RecyclerView") int position) {
         // Bind data to the ViewHolder
         holder.appName.setText(data.get(position).getAppName());
         holder.code.setText(String.valueOf(data.get(position).getCode()));
         holder.nextCode.setText(String.valueOf(data.get(position).getNextCode()));
+        holder.curr_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
+        holder.next_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
 
+         countDownTimer = new CountDownTimer(30000, 1000) {
 
+            @Override
+            public void onTick(long millisUntilFinished) {
+                holder.curr_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
+                holder.next_timer.setText("Reset in: " + String.valueOf(30000 / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                resetTimer();
+            }
+        };
     }
 
     private int getTOTP(String secret) {
@@ -115,5 +131,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    private void resetTimer() {
+        // Reset the timer to 30 seconds and start again
+        countDownTimer.cancel();
+        countDownTimer.start();
     }
 }
