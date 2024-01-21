@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="social_media_options">
+        <item>Facebook</item>
+        <item>Gmail</item>
+        <item>Instagram</item>
+    </array>
+
+    <array name="auth_type_options">
+        <item>Time Based</item>
+        <item>Counter Based</item>
+    </array>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "899047081720",
+    "project_id": "authapp-ef14e",
+    "storage_bucket": "authapp-ef14e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899047081720:android:a0a5fa0a9f204bcddf1d0d",
+        "android_client_info": {
+          "package_name": "com.bzu.auth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ6nYiSpXebQDoEcwSZNe3BisXPeCeZ0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899047081720:android:897761b743cf511bdf1d0d",
+        "android_client_info": {
+          "package_name": "edu.birzeit.androidprojectzamili"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ6nYiSpXebQDoEcwSZNe3BisXPeCeZ0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
