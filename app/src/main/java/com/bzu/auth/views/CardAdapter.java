@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,10 +17,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bzu.auth.R;
 import com.bzu.auth.model.AuthInfo;
+import com.amdelamar.jotp.OTP;
+import com.amdelamar.jotp.type.Type;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,7 +51,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
             public void run() {
                 // Update the data and notify the adapter of the changes
                 for (int i = 0; i < data.size(); i++) {
-                    updateData(i);
+                    try {
+                        updateData(i);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (NoSuchAlgorithmException e) {
+                        throw new RuntimeException(e);
+                    } catch (InvalidKeyException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 notifyDataSetChanged();
                 // Schedule the next update after 30 seconds
@@ -63,40 +72,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
 
     }
 
-    private void updateData(int position) { // TODO: update the code using volley
-        // Update the data (You can replace this with your logic to update the data)
-        String url = "http://127.0.0.1:5001/auth/totp";
+    private void updateData(int position) throws IOException, NoSuchAlgorithmException, InvalidKeyException {
 
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject respObj = new JSONObject(response);
-                    data.get(position).setCode(respObj.getString("code"));
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("secret",data.get(position).getSecretKey());
-                params.put("method","MD5");
-                return params;
-            }
-        };
-
-        queue.add(request);
-
+        String hexTime = OTP.timeInHex(System.currentTimeMillis(), 30);
+        String newValue = OTP.create(data.get(position).getSecretKey(), hexTime, 6, Type.TOTP);
+        data.get(position).setCode(newValue);
         updateTimes.put(position, System.currentTimeMillis());
     }
 
