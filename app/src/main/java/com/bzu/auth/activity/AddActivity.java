@@ -3,6 +3,7 @@ package com.bzu.auth.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -104,7 +105,7 @@ public class AddActivity extends AppCompatActivity {
         if(result.getContents() != null) {
             Pattern pattern = Pattern.compile("\\?secret=([^&]+).*&issuer=([^&]+)");
             Matcher matcher = pattern.matcher(result.getContents());
-
+            Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
             if (matcher.find()) {
                 String secret = matcher.group(1);
                 String issuer = matcher.group(2);
