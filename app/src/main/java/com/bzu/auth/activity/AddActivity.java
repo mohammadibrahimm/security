@@ -101,17 +101,8 @@ public class AddActivity extends AppCompatActivity {
         barcodeLauncher.launch(options);
     }
 
-    ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
-        if(result.getContents() != null) {
-            Pattern pattern = Pattern.compile("\\?secret=([^&]+).*&issuer=([^&]+)");
-            Matcher matcher = pattern.matcher(result.getContents());
-            Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
-            Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
-            if (matcher.find()) {
-                String secret = matcher.group(1);
-                String issuer = matcher.group(2);
-
-                Map<String, String> data = new HashMap<>();
+    /*
+                    Map<String, String> data = new HashMap<>();
                 data.put("email", Objects.requireNonNull(Database.auth.getCurrentUser()).getEmail());
                 data.put("app", issuer);
                 data.put("secret", secret);
@@ -132,6 +123,41 @@ public class AddActivity extends AppCompatActivity {
                                 toast.show();
                             }
                         });
+     */
+
+    ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
+        if(result.getContents() != null) {
+            Pattern pattern = Pattern.compile("secret=([^&]+)");
+            Matcher matcher = pattern.matcher(result.getContents());
+            Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
+            Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
+            if (matcher.find()) {
+                String secret = matcher.group(1);
+                pattern =Pattern.compile("issuer=([^&]+)");
+                matcher = pattern.matcher(result.getContents());
+                if(matcher.find()) {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("email", Objects.requireNonNull(Database.auth.getCurrentUser()).getEmail());
+                    data.put("app", matcher.group(1));
+                    data.put("secret", secret);
+                    Database.database.collection("secretKeys").
+                            add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast toast = Toast.makeText(AddActivity.this, "تم اضافة المنتج بنجاح 🥳", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    Intent intent = new Intent(AddActivity.this, MainScreen.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast toast = Toast.makeText(AddActivity.this, "خطأ في اضافة المنتج 😥", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            });
+                }
             } else {
                 System.out.println("No match found.");
             }
