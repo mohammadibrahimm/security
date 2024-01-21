@@ -147,19 +147,25 @@ public class AddActivity extends AppCompatActivity {
 
     ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
         if(result.getContents() != null) {
+
+
+            String url = result.getContents();
+
             Pattern pattern = Pattern.compile("secret=([^&]+)");
-            Matcher matcher = pattern.matcher(result.getContents());
+            Matcher matcher = pattern.matcher(url);
+
             if (matcher.find()) {
-                Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
-                Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
+                Log.d("DDDDDDDDDDDDDDDDDDDD", Objects.requireNonNull(matcher.group(1)));
+                Log.d("TTTTTTTTTTTTTTTTT", url);
                 String secret = matcher.group(1);
                 pattern = Pattern.compile("issuer=([^&]+)");
-                matcher = pattern.matcher(result.getContents());
-                Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
-                Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
+                matcher = pattern.matcher(url);
+                assert secret != null;
+                Log.d("DDDDDDDDDDDDDDDDDDDD", secret);
+                Log.d("TTTTTTTTTTTTTTTTT", url);
                 if(matcher.find()) {
-                    Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
-                    Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
+                    Log.d("DDDDDDDDDDDDDDDDDDDD", Objects.requireNonNull(matcher.group(1)));
+                    Log.d("TTTTTTTTTTTTTTTTT", url);
                     Map<String, String> data = new HashMap<>();
                     data.put("email", Objects.requireNonNull(Database.auth.getCurrentUser()).getEmail());
                     data.put("app", matcher.group(1));
