@@ -1,35 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_room"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    app:cardCornerRadius="4dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="16dp"
+    tools:openDrawer="start">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageViewIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"/>
+        android:id="@+id/room_card_ground"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/imageViewIcon"
-            android:textSize="18sp"
-            android:textColor="@android:color/black"/>
+            android:id="@+id/app_name"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/calibri"
+            android:text="App name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/textViewKey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewTitle"
-            android:layout_marginTop="-2dp"
-            android:layout_marginLeft="80dp"
-            android:textSize="18sp" />
-    </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#80D1D1D1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="100"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:orientation="vertical"
+                tools:ignore="NestedWeights">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:text="@string/current_code"
+                    tools:ignore="TextViewEdits" />
+
+                <EditText
+                    android:id="@+id/Current_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:editable="false"
+                    android:hint="The code gose here" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="change in: 00:00"
+                    android:id="@+id/curr_code_timer"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/next_code"
+                    android:id="@+id/next_code"
+                    />
+
+                <EditText
+                    android:id="@+id/user_room_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:editable="false"
+                    android:hint="The code gose here" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="change in: 00:00"
+                    android:id="@+id/next_code_timer"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>

@@ -77,6 +77,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
 
         String hexTime = OTP.timeInHex(System.currentTimeMillis() + 30000, 30);
         String newValue = OTP.create(data.get(position).getSecretKey(), hexTime, 6, Type.TOTP);
+
+
+        String hexTime2 = OTP.timeInHex(System.currentTimeMillis() + 60000, 30);
+        String newValue2 = OTP.create(data.get(position).getSecretKey(), hexTime2, 6, Type.TOTP);
+
+        data.get(position).setNextCode(newValue2);
         data.get(position).setCode(newValue);
         updateTimes.put(position, System.currentTimeMillis());
     }

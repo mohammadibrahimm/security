@@ -19,4 +19,6 @@
     <string name="menu_home">Home</string>
     <string name="register_tag">Register</string>
     <string name="reviews">Reviews</string>
+    <string name="current_code">Current code</string>
+    <string name="next_code">Next code</string>
 </resources>

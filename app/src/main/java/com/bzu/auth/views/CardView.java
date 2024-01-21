@@ -13,14 +13,20 @@ public class CardView extends RecyclerView.ViewHolder {
 
     TextView appName;
     TextView code;
-    ImageView imgView;
+    TextView nextCode;
+    TextView curr_timer;
+    TextView next_timer;
+
+
 
     public CardView(@NonNull View itemView) {
         super(itemView);
 
-        appName = itemView.findViewById(R.id.textViewTitle);
-        code = itemView.findViewById(R.id.textViewKey);
-        imgView =itemView.findViewById(R.id.imageViewIcon);
+        appName = itemView.findViewById(R.id.app_name);
+        code = itemView.findViewById(R.id.Current_code);
+        nextCode = itemView.findViewById(R.id.next_code);
+        curr_timer =itemView.findViewById(R.id.curr_code_timer);
+        next_timer =itemView.findViewById(R.id.next_code_timer);
 
 
     }

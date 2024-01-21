@@ -4,13 +4,21 @@ public class AuthInfo {
 
     String appName;
     String Code;
+    String nextCode;
     String secretKey;
 
     int number;
 
-    public AuthInfo(String appName, String code, String secretKey) {
+    public String getNextCode() {
+        return nextCode;
+    }
+
+    public void setNextCode(String nextCode) {
+        this.nextCode = nextCode;
+    }
+
+    public AuthInfo(String appName, String secretKey) {
         this.appName = appName;
-        this.Code = code;
         this.secretKey = secretKey;
         number = 1;
     }
