@@ -104,13 +104,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
         long timeElapsed = System.currentTimeMillis() - updateTimes.get(position);
         long timeRemaining = 300 - timeElapsed; // 30 seconds in milliseconds
 
-        if (timeRemaining <= 0) {
-            holder.code.setText("Updating...");
-        } else {
-            String formattedTime = formatTime(timeRemaining);
-            holder.code.setText(formattedTime);
-        }
-
     }
 
     private int getTOTP(String secret) {
