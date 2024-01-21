@@ -98,6 +98,26 @@ public class AddActivity extends AppCompatActivity {
         options.setBeepEnabled(true);
         options.setOrientationLocked(true);
         options.setCaptureActivity(CaptureAct.class);
+
+        Pattern pattern = Pattern.compile("secret=([^&]+)");
+        Matcher matcher = pattern.matcher("otpauth://totp/IT-Tools:demo-user?issuer=IT-Tools&secret=ZTHNT2ATMLYSNBCQ&algorithm=SHA1&digits=6&period=30");
+
+        if (matcher.find()) {
+            String secret = matcher.group(1);
+            assert secret != null;
+            Log.d("Secret: " ,secret);
+            pattern =Pattern.compile("issuer=([^&]+)");
+            matcher = pattern.matcher("otpauth://totp/IT-Tools:demo-user?issuer=IT-Tools&secret=ZTHNT2ATMLYSNBCQ&algorithm=SHA1&digits=6&period=30");
+            if(matcher.find()){
+                secret = matcher.group(1);
+                assert secret != null;
+                Log.d("issuer: ", secret);
+            }
+        } else {
+            System.out.println("No match found.");
+        }
+
+
         barcodeLauncher.launch(options);
     }
 
@@ -133,7 +153,7 @@ public class AddActivity extends AppCompatActivity {
                 Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
                 Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
                 String secret = matcher.group(1);
-                pattern =Pattern.compile("issuer=([^&]+)");
+                pattern = Pattern.compile("issuer=([^&]+)");
                 matcher = pattern.matcher(result.getContents());
                 Log.d("DDDDDDDDDDDDDDDDDDDD", String.valueOf(matcher.find()));
                 Log.d("TTTTTTTTTTTTTTTTT", result.getContents());
