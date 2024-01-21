@@ -92,9 +92,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
         holder.code.setText(String.valueOf(data.get(position).getCode()));
         holder.nextCode.setText(String.valueOf(data.get(position).getNextCode()));
 
-        // Update the timer
-        long timeElapsed = System.currentTimeMillis() - updateTimes.get(position);
-        long timeRemaining = 300 - timeElapsed; // 30 seconds in milliseconds
 
     }
 
