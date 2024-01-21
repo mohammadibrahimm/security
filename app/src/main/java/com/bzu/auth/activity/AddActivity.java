@@ -74,5 +74,13 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+        scanB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddActivity.this, QrCode.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
