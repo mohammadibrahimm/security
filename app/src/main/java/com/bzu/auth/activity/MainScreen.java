@@ -39,12 +39,12 @@ public class MainScreen extends AppCompatActivity {
 
         List<AuthInfo> data = new ArrayList<>();
 
-        data.add(new AuthInfo("test", "", "000000"));
-        data.add(new AuthInfo("test", "", "000000"));
-        data.add(new AuthInfo("test", "", "000000"));
-        data.add(new AuthInfo("test", "", "000000"));
-        data.add(new AuthInfo("test", "", "000000"));
-        data.add(new AuthInfo("test", "", "000000"));
+        data.add(new AuthInfo("test", "", "H4MDVD2CI5TKQI75"));
+        data.add(new AuthInfo("test", "", "H4MDVD2CI5TKQI75"));
+        data.add(new AuthInfo("test", "", "H4MDVD2CI5TKQI75"));
+        data.add(new AuthInfo("test", "", "H4MDVD2CI5TKQI75"));
+        data.add(new AuthInfo("test", "", "H4MDVD2CI5TKQI75"));
+        data.add(new AuthInfo("test", "", "H4MDVD2CI5TKQI75"));
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

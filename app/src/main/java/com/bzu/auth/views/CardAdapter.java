@@ -4,13 +4,23 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bzu.auth.R;
 import com.bzu.auth.model.AuthInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -53,12 +63,40 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
 
     }
 
-    private void updateData(int position) {
+    private void updateData(int position) { // TODO: update the code using volley
         // Update the data (You can replace this with your logic to update the data)
-        int newValue = data.get(position).getNumber() + 1; // Replace this with your update logic
-        data.get(position).setNumber(newValue);
+        String url = "http://127.0.0.1:5001/auth/totp";
 
-        // Update the last update time for this item
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject respObj = new JSONObject(response);
+                    data.get(position).setCode(respObj.getString("code"));
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("secret",data.get(position).getSecretKey());
+                params.put("method","MD5");
+                return params;
+            }
+        };
+
+        queue.add(request);
+
         updateTimes.put(position, System.currentTimeMillis());
     }
 
@@ -71,7 +109,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
     @Override
     public void onBindViewHolder(@NonNull CardView holder, @SuppressLint("RecyclerView") int position) {
         // Bind data to the ViewHolder
-        holder.appName.setText(String.valueOf(data.get(position)));
+        holder.appName.setText(String.valueOf(data.get(position).getCode()));
 
         // Update the timer
         long timeElapsed = System.currentTimeMillis() - updateTimes.get(position);
