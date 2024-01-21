@@ -96,7 +96,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardView> {
     @Override
     public void onBindViewHolder(@NonNull CardView holder, @SuppressLint("RecyclerView") int position) {
         // Bind data to the ViewHolder
-        holder.appName.setText(String.valueOf(data.get(position).getCode()));
+        holder.appName.setText(data.get(position).getAppName());
+        holder.code.setText(String.valueOf(data.get(position).getCode()));
+        holder.nextCode.setText(String.valueOf(data.get(position).getNextCode()));
 
         // Update the timer
         long timeElapsed = System.currentTimeMillis() - updateTimes.get(position);
