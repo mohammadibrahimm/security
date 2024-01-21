@@ -102,19 +102,6 @@ public class AddActivity extends AppCompatActivity {
 
     ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
         if(result.getContents() != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Res");
-            builder.setMessage(result.getContents());
-
-
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            }).show();
-
-
             Pattern pattern = Pattern.compile("\\?secret=([^&]+).*&issuer=([^&]+)");
             Matcher matcher = pattern.matcher(result.getContents());
 
