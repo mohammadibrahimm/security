@@ -27,6 +27,7 @@
             <EditText
                 android:id="@+id/editTextEmail"
                 style="@style/modifiedEditText"
+                android:layout_height="48dp"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:hint="@string/login_email_hint"/>
@@ -40,6 +41,8 @@
                 android:id="@+id/editTextPassword"
                 style="@style/modifiedEditText"
                 android:hint="@string/login_password_hint"
+                android:layout_height="48dp"
+
                 android:maxLines="1"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>

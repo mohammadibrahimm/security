@@ -1,5 +1,6 @@
 package com.bzu.auth.views;
 
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public class CardView extends RecyclerView.ViewHolder {
     TextView nextCode;
     TextView curr_timer;
     TextView next_timer;
+    CountDownTimer countDownTimer;
 
     public CardView(@NonNull View itemView) {
         super(itemView);

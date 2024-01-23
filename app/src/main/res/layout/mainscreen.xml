@@ -20,6 +20,16 @@
             android:textSize="20sp"
             android:textColor="@android:color/white"/>
 
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:text="Logout"
+            android:textColor="@android:color/white"/>
+
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -36,32 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageViewIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/main"
-                android:layout_marginEnd="16dp"/>
-
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/imageViewIcon"
-                android:text="Account Name"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"/>
-
-            <TextView
-                android:id="@+id/textViewKey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textViewTitle"
-                android:layout_marginTop="-2dp"
-                android:layout_marginLeft="80dp"
-                android:text="Key"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

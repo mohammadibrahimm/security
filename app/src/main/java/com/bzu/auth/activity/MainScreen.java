@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.bzu.auth.views.CardAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
 
@@ -31,7 +33,7 @@ public class MainScreen extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private CardAdapter adapter;
-
+    private Button logoutButton;
     private FloatingActionButton fabAddAccount;
     private CardView cardView;
 
@@ -89,6 +91,22 @@ public class MainScreen extends AppCompatActivity {
                     Intent intent = new Intent(MainScreen.this, AddActivity.class);
                     startActivityForResult(intent, 1);
                 }
+            }
+        });
+
+
+        logoutButton = findViewById(R.id.logoutButton);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Perform logout action
+                FirebaseAuth.getInstance().signOut();
+
+                // Navigate back to the login screen
+                Intent intent = new Intent(MainScreen.this, MainActivity1.class);
+                startActivity(intent);
+                finish();
             }
         });
 
